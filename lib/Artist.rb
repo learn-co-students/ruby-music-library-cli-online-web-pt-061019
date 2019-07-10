@@ -35,4 +35,9 @@ class Artist
     @songs.include?(song) ? song : @songs << song
   end
 
+  #spec 006
+  def genres
+    self.songs.map { |song| song.genre }.uniq
+  end
+
 end
