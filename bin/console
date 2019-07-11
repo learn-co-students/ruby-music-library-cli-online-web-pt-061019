@@ -1,5 +1,11 @@
 #!/usr/bin/enr ruby
-require 'irb'
-require_relative '../config/enviroment'
 
+require_relative '../config/enviroment'
+require 'irb'
+
+def reload!
+  load '../config/environment.rb'
+end
+
+puts "...loading your CLI Enviroment"
 IRB.start
