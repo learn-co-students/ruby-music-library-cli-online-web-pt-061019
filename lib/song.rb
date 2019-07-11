@@ -47,38 +47,18 @@ class Song
 
   def self.new_from_filename(filename)
     songname = filename.split(" - ")[1]
-    # song = self.new(songname)
-
     artistname = filename.split(" - ")[0]
     genrename = filename.split(" - ")[2].split(".")[0]
-    # genre_name = genrename.split(".")[0]
-
-
-    new_artist = Artist.new(artistname)
-
-    new_genre = Genre.new(genrename)
+    new_artist = Artist.find_or_create_by_name(artistname)
+    new_genre = Genre.find_or_create_by_name(genrename)
     song = self.new(songname, new_artist , new_genre)
-    # song = self.new(songname)
-    # song.artist = new_artist
-    # song.genre = new_genre
-    # if (song.artist.nil?)
-    #   new_artist = Artist.new(artistname)
-    #   new_genre = Genre.new(genrename)
-    #   song.artist = new_artist
-    #   new_artist.songs << song
-    #   new_artist.save
-    # else
-    #   song.artist.name = artistname
-    #   song.genre.name = genrename
-    # end
-
-    # @@all << song
     song
-      # binding.pry
   end
 
-  def create_from_filename
-
+  def self.create_from_filename(filename)
+    song = Song.new_from_filename(filename)
+    song.save
+    song
   end
 
 end

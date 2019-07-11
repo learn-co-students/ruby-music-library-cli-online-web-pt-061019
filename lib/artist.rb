@@ -40,8 +40,4 @@ class Artist
     # binding.pry
   end
 
-  # def songs
-  #   @songs
-  # end
-
 end

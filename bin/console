@@ -1,10 +1,10 @@
-#!/usr/bin/enr ruby
+#!/usr/bin/env ruby
 
-require_relative '../config/enviroment'
+require_relative '../config/environment'
 require 'irb'
 
 def reload!
-  load '../config/environment.rb'
+  load './config/environment.rb'
 end
 
 puts "...loading your CLI Enviroment"
