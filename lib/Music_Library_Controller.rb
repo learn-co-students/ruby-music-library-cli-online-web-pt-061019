@@ -24,6 +24,13 @@ class MusicLibraryController
       puts "What would you like to do?"
 
       user_input = gets.strip
+
+      case user_input
+      when "list songs"
+        list_songs
+      else
+      end
+
     end
   end
 
@@ -78,7 +85,7 @@ class MusicLibraryController
     puts "Please enter the name of a genre:"
     user_input = gets.strip
     genre =  Genre.find_by_name(user_input)
-    # binding.pry
+
     if genre
       songs = genre.songs.sort{|a,b| a.name <=> b.name}
       songs.each_with_index do |s,idx|
