@@ -1,6 +1,8 @@
+require_relative '../lib/concerns/findable'
 require 'pry'
 
 class Genre
+  extend Concerns::Findable
   attr_accessor :name
   attr_reader :songs, :artist
 
@@ -8,7 +10,7 @@ class Genre
 
   def initialize(name)
     @name = name
-    self.save
+    # self.save
     @songs = []
   end
 
@@ -40,5 +42,5 @@ class Genre
     #has many artists through songs
     songs.map{|song_new| song_new.artist}.uniq
   end
-  
+
 end

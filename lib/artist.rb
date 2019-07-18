@@ -1,6 +1,8 @@
 require 'pry'
+require_relative '../lib/concerns/findable'
 
 class Artist
+  extend Concerns::Findable
   attr_accessor :name
   attr_reader :songs, :genre
 
@@ -8,7 +10,7 @@ class Artist
 
   def initialize(name)
     @name = name
-    self.save
+    # self.save
     @songs = [] #artist has many songs
   end
 
