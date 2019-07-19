@@ -2,6 +2,8 @@ require 'pry'
 
 class Genre
 
+  extend Concerns::Findable
+
   attr_accessor :name, :songs
 
   @@all = []
@@ -38,6 +40,16 @@ class Genre
   #spec 006
   def artists
     self.songs.map { |song| song.artist }.uniq
+  end
+
+
+
+  def self.find_or_create_by_name(name)
+    if self.find_by_name(name) != nil
+      self.find_by_name(name)
+    else
+      self.create(name)
+    end
   end
 
 end
