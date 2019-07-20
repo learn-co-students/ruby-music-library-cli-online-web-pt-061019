@@ -9,4 +9,9 @@ class MusicImporter
     Dir.entries(path).reject{|f| f == '.' || f == '..'}
     #
   end
+
+  def import
+    # binding.pry
+    files.each{ |file| Song.create_from_filename(file)}
+  end
 end

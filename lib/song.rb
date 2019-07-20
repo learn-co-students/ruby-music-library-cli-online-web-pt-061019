@@ -1,4 +1,5 @@
 require 'pry'
+require_relative '../lib/concerns/findable'
 
 class Song
   # extend Concerns::Findable
@@ -9,6 +10,7 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
+    @artist = artist
     self.artist = artist if artist #song belongs to artist
     self.genre = genre if genre
     # self.save
@@ -59,7 +61,16 @@ class Song
   end
 
   def self.new_from_filename(name)
-    
+    # binding.pry
+    artist, song, genre = name.chomp(".mp3").split(" - ")
+    #.gsub(".mp3", "")
+    artist = Artist.find_or_create_by_name(artist)
+    genre = Genre.find_or_create_by_name(genre)
+    new(song, artist, genre)
+  end
+
+  def self.create_from_filename(name)
+    new_from_filename(name).save
   end
 
 end
