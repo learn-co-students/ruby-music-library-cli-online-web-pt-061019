@@ -26,11 +26,34 @@ class MusicLibraryController
   end
 
   def list_songs
-    song_list = Song.all.sort { |a,b| a.name <=> b.name}
-    binding.pry
+    song_list = Song.all.uniq.sort { |a,b| a.name <=> b.name}
     song_list.each_with_index do |song, index|
-      # binding.pry
       puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+  def list_artists
+    artist_list = Artist.all.uniq.sort { |a,b| a.name <=> b.name}
+    artist_list.each_with_index do |artist, index|
+      puts "#{index+1}. #{artist.name}"
+    end
+  end
+
+  def list_genres
+    genre_list = Genre.all.uniq.sort { |a,b| a.name <=> b.name}
+    genre_list.each_with_index do |genre, index|
+      puts "#{index+1}. #{genre.name}"
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    this_artist = gets
+    if artist_object = Artist.find_by_name(this_artist)
+      song_list = artist_object.songs.sort { |a,b| a.name <=> b.name}
+      song_list.each_with_index do |song, index|
+        puts "#{index+1}. #{song.name} - #{song.genre.name}"
+      end
     end
   end
 
