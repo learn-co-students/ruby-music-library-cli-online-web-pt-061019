@@ -14,8 +14,9 @@ class MusicImporter
 
   #spec 009
   def import
-    Song.create_from_filename(filename)
-
+    self.files.each do |file|
+      Song.create_from_filename(file)
+    end
   end
 
 end
