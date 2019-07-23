@@ -21,8 +21,22 @@ class MusicLibraryController
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
       command = gets
+      case command
+      when 'list songs'
+        list_songs
+      when 'list artists'
+        list_artists
+      when 'list genres'
+        list_genres
+      when 'list artist'
+        list_songs_by_artist
+      when 'list genre'
+        list_songs_by_genre
+      when 'play song'
+        play_song
+      end
     end
-    command
+
   end
 
   def list_songs
@@ -30,6 +44,7 @@ class MusicLibraryController
     song_list.each_with_index do |song, index|
       puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
+    song_list
   end
 
   def list_artists
@@ -92,9 +107,10 @@ class MusicLibraryController
   def play_song
       puts "Which song number would you like to play?"
       song_number = gets.to_i - 1
-      if song_number >= 0
-        # puts "Playing #{list_songs[song_number]}"
-        binding.pry
+      song_list = Song.all.uniq.sort { |a,b| a.name <=> b.name}
+      if song_number >= 0 && song_number < 5
+        puts "Playing #{song_list[song_number].name} by #{song_list[song_number].artist.name}"
+        # binding.pry
       end
     end
 
