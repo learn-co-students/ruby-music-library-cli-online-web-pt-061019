@@ -49,6 +49,10 @@ class MusicLibraryController
   # with_index method takes an optional parameter to offset the starting index.
   # each_with_index does the same thing, but has no optional starting index.
 
+# sorted_song = Song.all.sort{|a, b| a.name <=> b.name}
+# sorted_song.each.with_index{|song, index|
+# puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}”}
+
   def list_artists
     Artist.all.sort_by(&:name).each.with_index(1) do |artist, index|
       puts "#{index}. #{artist.name}"
