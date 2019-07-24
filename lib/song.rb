@@ -21,7 +21,6 @@ class Song
   end
   
   def self.create(name)
-    # binding pry
     new_song = Song.new(name)
     new_song.save
     new_song
@@ -44,4 +43,18 @@ class Song
   def self.find_or_create_by_name(name)
     self.find_by_name(name) || self.create(name)
   end
+  
+  def self.new_from_filename(filename)
+    name = filename.split(" - ")[1]
+    artist = filename.split(" - ")[0]
+    genre = filename.split(" - ")[2].chomp(".mp3")
+    new_song_file = self.find_or_create_by_name(name)
+    new_song_file.artist = Artist.find_or_create_by_name(artist)
+    new_song_file.genre = Genre.find_or_create_by_name(genre)
+    new_song_file 
+  end
+  
+  def self.create_from_filename(filename)
+end
+    
 end
