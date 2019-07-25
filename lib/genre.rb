@@ -2,12 +2,14 @@ require_relative '../lib/concerns/findable'
 
 class Genre 
     extend Concerns::Findable
-  attr_accessor :name, :songs
+  attr_accessor :name
+  attr_reader :songs
   @@all = []
   
   def initialize(name)
     @name = name
     @songs = []
+    # self.save
   end
   
   def self.all 
@@ -23,7 +25,8 @@ class Genre
   end
   
   def self.create(name)
-    (genre = Genre.new(name)).save
+    genre = Genre.new(name)
+    genre.save
     genre
   end
   
