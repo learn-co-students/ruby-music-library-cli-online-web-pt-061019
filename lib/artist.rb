@@ -1,3 +1,4 @@
+require 'pry'
 class Artist
   extend Concerns::Findable
   @@all = []
@@ -32,6 +33,5 @@ class Artist
   
   def genres
     self.songs.map{|song| song.genre}.uniq
-    end
-
+  end
 end
