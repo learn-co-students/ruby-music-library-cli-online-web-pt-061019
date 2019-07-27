@@ -6,7 +6,9 @@ class MusicImporter
   end
   
   def files
-    Dir.children(self.path).each {|filename| Song.new_from_filename(filename)}
+    # Dir.children(self.path).each {|filename| Song.new_from_filename(filename)}
+    
+    files = Dir.glob("#{path}/*.mp3").map {|file| file.gsub("#{path}/","")}
   end
   
   def import
