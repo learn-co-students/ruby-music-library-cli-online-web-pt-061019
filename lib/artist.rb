@@ -1,5 +1,8 @@
 require 'pry'
 class Artist
+
+    extend Concerns::Findable
+    
     attr_accessor :name, :songs
 
     @@all = []
@@ -28,9 +31,15 @@ class Artist
     end     
 
     def add_song(song)
-        if song.artist == nil
-            song.artist = self
-            self.songs << song
+        song.artist = self unless song.artist
+        self.songs << song unless songs.include?(song)
+    end
+
+    def genres
+        genre_list = []
+        self.songs.each do |song|
+            genre_list << song.genre
         end
+        genre_list.uniq
     end
 end

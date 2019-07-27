@@ -1,4 +1,7 @@
 class Genre
+    
+    extend Concerns::Findable
+
     attr_accessor :name, :songs
 
     @@all = []
@@ -25,5 +28,13 @@ class Genre
     def save
         @@all << self
     end 
+
+    def artists
+        artist_list = []
+        self.songs.each do |song|
+            artist_list << song.artist
+        end
+        artist_list.uniq
+    end
 
 end
