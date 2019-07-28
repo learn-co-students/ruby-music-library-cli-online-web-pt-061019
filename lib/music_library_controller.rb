@@ -8,7 +8,7 @@ class MusicLibraryController
     end
 
     def call
-        input = gets until input == "exit"
+        input = gets.chomp until input == "exit"
             puts "Welcome to your music library!"
             puts "To list all of your songs, enter 'list songs'."
             puts "To list all of the artists in your library, enter 'list artists'."
@@ -23,4 +23,23 @@ class MusicLibraryController
     def list_songs
         Song.all.sort {|a, b| a.name <=> b.name}.each_with_index {|song, index| puts "#{index +1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
     end
+
+    def list_artists
+        Artist.all.sort {|a, b| a.name <=> b.name}.each_with_index {|artist, index| puts "#{index +1}. #{artist.name}"}
+    end
+
+    def list_genres
+        Genre.all.sort {|a, b| a.name <=> b.name}.each_with_index {|genre, index| puts "#{index +1}. #{genre.name}"}
+    end
+
+    def list_songs_by_artist
+        puts "Please enter the name of an artist:"
+        input = gets.chomp
+        artist = Artist.find_by_name(input)
+
+        if artist
+            artist.songs.sort {|a, b| a.name <=> b.name}.each_with_index {|song, index| puts "#{index +1}. #{song.name} - #{song.genre.name}"}
+        end
+    end
+
 end
