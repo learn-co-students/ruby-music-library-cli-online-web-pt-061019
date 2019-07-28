@@ -10,7 +10,6 @@ attr_reader :songs
 def initialize(name)
 @name = name
 @songs = []
-save
 end
 
 def self.all
@@ -21,9 +20,11 @@ end
    self.class.all << self
  end
 
- # def self.create(genre)
- #    self.new(genre)
- # end
+def self.create(genre)
+  genre = new(genre)
+  genre.save
+  genre
+end 
 
  def self.destroy_all
    all.clear
@@ -31,15 +32,5 @@ end
 
  def artists
    songs.collect(&:artist).uniq
- end
-
-
- def add_song(song)
-   if song.genre == nil #at instantiation, if song does not belong to artist,
-     song.genre = self
-   end
-   if !@songs.include?(song) #If me the artist, my list of songs does not include this song, I want to push it in.
-     @songs << song
-   end
  end
 end

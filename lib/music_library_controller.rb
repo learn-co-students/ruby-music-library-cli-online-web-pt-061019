@@ -40,27 +40,26 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all.uniq.sort_by(&:name).each.with_index(1) do |song, idx|
+    Song.all.sort_by(&:name).each.with_index(1) do |song, idx|
       puts "#{idx}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def list_artists
-    Artist.all.uniq.sort_by(&:name).each.with_index(1) do |artist, idx|
+    Artist.all.sort_by(&:name).each.with_index(1) do |artist, idx|
       puts "#{idx}. #{artist.name}"
     end
   end
 
   def list_genres
-    Genre.all.uniq.sort_by(&:name).each.with_index(1) do |genre, idx|
+    Genre.all.sort_by(&:name).each.with_index(1) do |genre, idx|
       puts "#{idx}. #{genre.name}"
     end
   end
 
   def list_songs_by_artist
-    input = ""
     puts "Please enter the name of an artist:"
-    input = gets.strip
+    input = gets.strip.to_i
     if artist = Artist.find_by_name(input)
       artist.songs.sort_by(&:name).each.with_index(1) do |song, idx|
         puts "#{idx}. #{song.name} - #{song.genre.name}"
@@ -68,11 +67,10 @@ class MusicLibraryController
     end
   end
   def list_songs_by_genre
-    input = ""
     puts "Please enter the name of a genre:"
-    input = gets.strip
+    input = gets.strip.to_i
     if genre = Genre.find_by_name(input)
-      genre.songs.uniq.sort_by(&:name).each.with_index(1) do |song, idx|
+      genre.songs.sort_by(&:name).each.with_index(1) do |song, idx|
         puts "#{idx}. #{song.artist.name} - #{song.name}"
       end
     end
@@ -84,6 +82,6 @@ class MusicLibraryController
     if song_number.between?(1, Song.all.length)
       song = Song.all.sort{ |a, b| a.name <=> b.name }[song_number - 1]
     end
-    puts "Playing #{song.name} by #{song.artist.name}"
+    puts "Playing #{song.name} by #{song.artist.name}" if song
   end
 end

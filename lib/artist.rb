@@ -11,7 +11,6 @@ extend Concerns::Findable
   def initialize(name)
     @name = name
     @songs = []
-    save #this saves new songs
   end
 
   def self.all
@@ -23,7 +22,9 @@ extend Concerns::Findable
   end
 
    def self.create(artist)
-     self.new(artist)
+     artist = new(artist)
+     artist.save
+     artist
    end
 
   def self.destroy_all
@@ -35,11 +36,7 @@ extend Concerns::Findable
   end
 
   def add_song(song)
-    if song.artist == nil #at instantiation, if song does not belong to artist,
-      song.artist = self
-    end
-    if !@songs.include?(song) #If me the artist, my list of songs does not include this song, I want to push it in.
-      @songs << song
-    end
+    song.artist = self unless song.artist
+    songs << song unless songs.include?(song) 
   end
 end
