@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicLibraryController
 
   def initialize(path = "./db/mp3s")
@@ -7,7 +9,7 @@ class MusicLibraryController
   def call
 
       user_input = " "
-      while user_input != "exit!"
+      while user_input != "exit"
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -22,4 +24,13 @@ class MusicLibraryController
     end
   end
 
-end
+  def list_songs
+      Song.all.sort{|a,b| a.name <=> b.name}.each_with_index{|song, index| puts "#{index +1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    end
+  end
+
+  def list_artists
+    Artist.all.sort{|a,b| a.name <=> b.name}.each_with_index{|name, index| puts "#{index +1}.
+     #{Artist.name}"}
+
+  end
