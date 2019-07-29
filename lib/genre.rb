@@ -1,5 +1,7 @@
 class Genre
   extend Concerns::Findable
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
   
   attr_accessor :name 
   attr_reader :artist, :songs
@@ -16,13 +18,13 @@ class Genre
     @@all
   end
 
-  def self.destroy_all
-    @@all.clear
-  end
+  # def self.destroy_all
+  #   @@all.clear
+  # end
 
-  def save
-    self.class.all << self
-  end
+  # def save
+  #   self.class.all << self
+  # end
 
   def self.create(name)
     genre = self.new(name)

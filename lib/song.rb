@@ -1,5 +1,7 @@
 class Song
     extend Concerns::Findable
+    extend Persistable::ClassMethods
+    include Persistable::InstanceMethods
 
   
   attr_accessor :name 
@@ -17,13 +19,13 @@ class Song
     @@all
   end
 
-  def self.destroy_all
-    @@all.clear
-  end
+  # def self.destroy_all
+  #   @@all.clear
+  # end
 
-  def save
-   self.class.all << self
-  end
+  # def save
+  # self.class.all << self
+  # end
 
   def self.create(name)
     song = self.new(name)
