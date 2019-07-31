@@ -3,3 +3,7 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+# require_relative "../lib/song.rb"
+# require_relative "../lib/genre.rb"
+# require_relative "../lib/artist.rb"
+# I added these three ahead or request
