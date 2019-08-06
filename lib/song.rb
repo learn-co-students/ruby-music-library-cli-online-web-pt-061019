@@ -1,4 +1,6 @@
+require 'pry'
 class Song
+  extend Concerns::Findable
   attr_accessor :name
 
     @@all = []
@@ -19,11 +21,12 @@ class Song
 
   def save
     Song.all << self
+    self
   end
 
   def self.create(name)
     songs = Song.new(name)
-    songs.name = self
+    song.save
   end
 
   def artist=(artist)
@@ -45,6 +48,15 @@ class Song
   end
 
   def self.find_by_name(name)
-    @@all.detect {|song| song.name == name}
+
+    @@all.detect do |song|
+
+      song.name == name
+    end
   end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
+  end
+
 end

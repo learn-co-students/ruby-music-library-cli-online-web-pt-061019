@@ -1,4 +1,5 @@
 class Genre
+  extend Concerns::Findable
   attr_accessor :name, :songs
   @@all = []
   def initialize(name)
@@ -17,11 +18,12 @@ class Genre
 
   def save
     Genre.all << self
+    self
   end
 
   def self.create(name)
     genre = Genre.new(name)
-    genre.name = self
+    genre.save
   end
 
   def songs
