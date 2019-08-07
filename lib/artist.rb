@@ -1,12 +1,12 @@
 # require 'concerns/findable'
 class Artist
   extend Concerns::Findable
-  attr_accessor :name, :artist, :genres
+  attr_accessor :name, :artist, :songs, :genres
   @@all = []
   def initialize(name)
     @name = name
-    @artist = artist
-    @@all << self
+    # @artist = artist
+    # @@all << self
     @songs = []
   end
 
