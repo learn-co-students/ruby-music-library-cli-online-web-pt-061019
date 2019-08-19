@@ -2,7 +2,18 @@ require "spec_helper"
 
 describe "Song" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
-
+  
+  Song.new("Kaohsiung Christmas").name  
+  Song.all 
+  
+  Song.destroy_all
+  Song.all 
+  
+  Song.create("BlankSpace")
+  Song.all 
+  
+  Artist.all 
+  
   describe "#initialize" do
     it "accepts a name for the new song" do
       new_song = Song.new("Alison")
